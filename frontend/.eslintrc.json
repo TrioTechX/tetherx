@@ -1,0 +1,16 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "react/no-unknown-property": "off"
+  },
+  "overrides": [
+    {
+      "files": ["app/icon.tsx", "app/**/icon.tsx"],
+      "rules": {
+        "react/forbid-dom-props": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    }
+  ]
+}

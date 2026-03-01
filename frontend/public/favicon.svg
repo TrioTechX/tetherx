@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#040608;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1117;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" fill="url(#bg)" rx="4"/>
+  
+  <!-- Shield outline with opacity -->
+  <path d="M16 6L9 9V14C9 17.2 11.2 20.2 16 21.5C20.8 20.2 23 17.2 23 14V9L16 6Z" 
+        fill="none" stroke="#00ff41" stroke-width="1.5" opacity="0.2"/>
+  
+  <!-- S letter with glow -->
+  <text x="16" y="22" 
+        font-family="monospace" 
+        font-size="18" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="#00ff41"
+        filter="url(#glow)">S</text>
+</svg>

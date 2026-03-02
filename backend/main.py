@@ -83,21 +83,7 @@ app = FastAPI(
 )
 
 
-class EnsureCORSHeadersMiddleware(BaseHTTPMiddleware):
-    """Add CORS headers to every response so errors (e.g. 500) still allow browser to read them."""
-
-    async def dispatch(self, request: Request, call_next: Callable) -> Response:
-        response = await call_next(request)
-        origin = request.headers.get("origin")
-        if origin and origin in CORS_ORIGINS:
-            response.headers.setdefault("Access-Control-Allow-Origin", origin)
-        response.headers.setdefault("Access-Control-Allow-Credentials", "true")
-        response.headers.setdefault("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE")
-        response.headers.setdefault("Access-Control-Allow-Headers", "*")
-        return response
-
-
-app.add_middleware(EnsureCORSHeadersMiddleware)
+# Middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,

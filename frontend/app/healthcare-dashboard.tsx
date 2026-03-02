@@ -48,9 +48,7 @@ import { PendingApprovalsPanel, CriticalLockBadge } from "@/components/PendingAp
 // ─────────────────────────────────────────────────────────────────────────────
 
 function getApiUrl() {
-    return typeof window !== "undefined"
-        ? (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000")
-        : "http://localhost:8000";
+    return process.env.NEXT_PUBLIC_API_URL || "";
 }
 
 function apiFetch(path: string, init: RequestInit = {}) {

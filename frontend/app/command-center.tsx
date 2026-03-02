@@ -1378,7 +1378,7 @@ export function ReceiverDashboard({ onSignOut }: { onSignOut?: () => void } = {}
   // Track whether an INGEST came from WS (to suppress Supabase duplicate)
   const wsIngestIds = useRef(new Set<string>());
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 
   // ── Uptime counter ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -1683,7 +1683,7 @@ export function ReceiverDashboard({ onSignOut }: { onSignOut?: () => void } = {}
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function SenderDashboard({ onSignOut }: { onSignOut?: () => void } = {}) {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 
   const [sentMessages, setSentMessages] = useState<ChatLogRow[]>([]);
   const [threatCount, setThreatCount] = useState(0);

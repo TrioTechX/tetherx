@@ -65,6 +65,8 @@ CORS_ORIGINS = [
     # LAN — Machine B (receiver laptop)
     "http://10.53.222.108:3000",
     "http://10.53.222.108:3001",
+    # Production
+    "https://tetherx.vercel.app",
 ]
 
 app = FastAPI(

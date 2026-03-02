@@ -137,7 +137,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return {
           error: new Error(
             isNetwork
-              ? "Cannot reach the API. Start the backend: cd backend && python main.py (port 8000)"
+              ? "Cannot reach the backend API. Please try again later."
               : msg
           ),
         };

@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: sentinel-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SUPABASE_DB_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: AES_MASTER_KEY
+        sync: false
+      - key: HMAC_SECRET
+        sync: false
+      - key: BLOOM_FILTER_SIZE
+        value: "10000"
+      - key: BLOOM_HASH_COUNT
+        value: "7"
+      - key: THREAT_MATCH_THRESHOLD
+        value: "2"
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_ALGORITHM
+        value: "HS256"
+      - key: JWT_EXPIRE_MINUTES
+        value: "1440"

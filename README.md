@@ -5,6 +5,47 @@
 
 ---
 
+## ⚖️ Judge Access & Testing Credentials
+
+Use these pre-provisioned UUIDs and passwords to test the RBAC (Role-Based Access Control) system.
+
+| Role | Operator UUID | Password | Description |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `550e8400-e29b-41d4-a716-446655440012` | `sentinel-admin-01` | Full System Control |
+| **Doctor 1** | `dd749ae6-51b5-414c-af0c-e8965167f894` | `iamd1` | **Assigned to Patient 2** |
+| **Doctor 2** | `cb6f37d5-f79c-4f07-ad61-3c62496af1e3` | `iamd2` | **No Assignments (Deny All)** |
+| **Doctor (Gen)** | `550e8400-e29b-41d4-a716-446655440010` | `sentinel-doctor-01` | Generic Doctor Account |
+| **Nurse** | `550e8400-e29b-41d4-a716-446655440011` | `sentinel-nurse-01` | View Metadata Only |
+| **Patient 1** | `b45f6df8-4291-4954-b060-27e97e517370` | `iamp1` | Restricted Records |
+| **Patient 2** | `f31a0105-c260-4fbc-bbcd-01ed7b99828c` | `iamp2` | Restricted Records |
+| **Patient (Gen)** | `550e8400-e29b-41d4-a716-446655440013` | `sentinel-patient-01` | Generic Patient Account |
+| **Auditor** | `550e8400-e29b-41d4-a716-446655440014` | `sentinel-auditor-01` | View All Audit Logs |
+
+---
+
+### 🛡️ RBAC Proof-of-Work (Testing Scenarios)
+The following configuration has been applied to demonstrate strict Role-Based Access Control:
+
+1.  **Doctor 1 (`dd749ae6-51b5-414c-af0c-e8965167f894`)**: Is assigned to **Patient 2 (`f31a0105-c260-4fbc-bbcd-01ed7b99828c`)**. If you log in as Doctor 1, you can decrypt Patient 2's records, but will be denied access to Patient 1.
+2.  **Doctor 2 (`cb6f37d5-f79c-4f07-ad61-3c62496af1e3`)**: Has **Zero Assignments**. If you log in as Doctor 2 and try to access Patient 1 or Patient 2, you will receive an "Access Denied" error because no assignment map exists.
+3.  **Patient 1/2**: Can log in to the **Patient Portal** (using their own UUID) to decrypt their *own* records, but cannot see or search for records belonging to other patients.
+4.  **Admin**: Can use the assignment panel to grant/revoke these permissions in real-time.
+
+---
+
+### 🛠️ Developer Provisioning Flow
+Operators are not registered via the UI (Zero-Trust). As a developer, I provision them using a local Python script to ensure `bcrypt` hashing happens before the data ever touches the cloud:
+
+1.  **Generate SQL**: Run `python backend/scripts/create_operator.py`.
+2.  **Input Details**: Enter the desired UUID (or press Enter for a random one), Password, and Role.
+3.  **Deploy to DB**: Copy the generated `INSERT` statement and run it in the **Supabase SQL Editor**.
+
+### 🔗 Deployment Links
+- **Frontend (UI)**: [https://tetherx.vercel.app/](https://tetherx.vercel.app/)
+- **Backend (API)**: [https://sentinel-backend-tkgg.onrender.com](https://sentinel-backend-tkgg.onrender.com) (Required for frontend communication)
+
+---
+
 ## Architecture Overview
 
 ```
